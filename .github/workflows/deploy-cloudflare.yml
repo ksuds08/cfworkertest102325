@@ -134,7 +134,7 @@ jobs:
           fi
           
           # Extract URL from deployment
-          DEPLOYED_URL=$(grep -oP "https://[a-zA-Z0-9.-]+\.workers\.dev" deploy.log | head -1 || echo "")
+          DEPLOYED_URL=$(grep -oP "https://[a-zA-Z0-9.-]+\\.workers\\.dev" deploy.log | head -1 || echo "")
           if [ -n "$DEPLOYED_URL" ]; then
             echo "url=$DEPLOYED_URL" >> $GITHUB_OUTPUT
             echo "::notice::Worker deployed to $DEPLOYED_URL"
@@ -145,9 +145,9 @@ jobs:
       - name: Update Deployment URL in Flowglass
         if: steps.deploy.outputs.url != ''
         run: |
-          curl -X POST \
-            "${{ secrets.FLOWGLASS_API_URL || 'https://gfuimydpzkqzpcqqhvpu.supabase.co' }}/functions/v1/update-deployment-url" \',
-            -H "Content-Type: application/json" \
+          curl -X POST \\
+            "${{ secrets.FLOWGLASS_API_URL || 'https://gfuimydpzkqzpcqqhvpu.supabase.co' }}/functions/v1/update-deployment-url" \\',
+            -H "Content-Type: application/json" \\
             -d '{
               "projectId": "f9e6bcde-c066-4d60-a5b3-626810d880b9",
               "deploymentUrl": "${{ steps.deploy.outputs.url }}",
