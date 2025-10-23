@@ -1,18 +1,20 @@
-// Type definitions for the Cloudflare Worker
-
-// TODO: Define the request type for handling incoming requests
-export interface WorkerRequest {
-    method: string;
-    url: string;
-    headers: { [key: string]: string };
+export interface User {
+    id: string;
+    name: string;
+    email: string;
 }
 
-// TODO: Define the response type for outgoing responses
-export interface WorkerResponse {
-    status: number;
-    body: string;
-    headers: { [key: string]: string };
+export interface Product {
+    id: string;
+    name: string;
+    price: number;
 }
 
-// TODO: Define the main handler function signature
-export type HandlerFunction = (req: WorkerRequest) => Promise<WorkerResponse>;
+export interface Order {
+    orderId: string;
+    userId: string;
+    products: Product[];
+}
+
+// TODO: Implement user authentication functionality
+// TODO: Create order processing functionality
